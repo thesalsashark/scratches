@@ -1,6 +1,7 @@
 import random
 import itertools
 import tabulate
+import PrettyTable
 
 weapons = {'Fist': {'+atk': 0, 'Cost': 10},
            'Wooden Sword': {'+atk': 2, 'Cost': 20},
@@ -85,7 +86,7 @@ def armor_store():
     armor_cost = len(str(max(int(d['Cost']) for d in armor.values())))
 
     print("{:<{armor_name}} {:<{armor_def}} {:<{armor_cost}}".format('Armor', 'Def', 'Cost', armor_name=armor_name, armor_def=armor_def, armor_cost=armor_cost))
-    for (k1, v1) in armor.items():
+    for (k1, v1) in enumerate(armor.items()):
         Def = v1["+def"]
         Cost = v1["Cost"]
         print("{:<{armor_name}} {:<{armor_def}} {:<{armor_cost}}".format(k1, Def, Cost, armor_name=armor_name, armor_def=armor_def, armor_cost=armor_cost))
@@ -95,4 +96,13 @@ def armor_store():
         print(player.curarmor)
     main()
 
-main()
+# main()
+
+print("{} : {:<22} : {:^5} : {:^5}".format('Num', 'Name', '+atk', 'Cost'))
+for num, (k, v) in enumerate(weapons.items(), start=1):
+    print("{:<3} : {:<22} : {:^5} : {:^5}".format(num, k, v['+atk'], v['Cost']))
+
+t = tabulate(['Num', 'Name', '+atk', 'Cost'])
+for num, (k, v) in enumerate(weapons.items(), start=1):
+    t.add_row(num, (k,v))
+print(t)
