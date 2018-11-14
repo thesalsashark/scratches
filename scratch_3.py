@@ -1,7 +1,7 @@
 import random
 import itertools
-# import tabulate
-# from prettytable import PrettyTable
+import tabulate
+import PrettyTable
 
 weapons = {'Fist': {'+atk': 0, 'Cost': 10},
            'Wooden Sword': {'+atk': 2, 'Cost': 20},
@@ -18,6 +18,7 @@ armor = {"Travelers Cloths": {'+def': 0, 'Cost': 10},
          'Mail Armor': {'+def': 8, 'Cost': 250},
          'Steel Armor': {'+def': 10, 'Cost': 300}}
 
+equipment_slots = {'head': None, 'shoulder': None, }
 
 class Player:
     def __init__(self, name, curweap=None, curarmor=None):
@@ -75,7 +76,7 @@ def weapons_store():
         print("{:<{weapon_name}} {:<{weapon_atk}} {:<{weapon_cost}}".format(k1, Atk, Cost, weapon_name=weapon_name, weapon_atk=weapon_atk, weapon_cost=weapon_cost))
     option = input("You have %s gold. What would you like to buy?" % player.gold)
     if option is not None:
-        player.curweap = list(armor.keys())[(int(option) - 1)] ##get the key the corresponds to the number typed in
+        player.curweap = list(armor.keys())[(int(option) - 1)]
         print(player.curweap)
     main()
 
@@ -97,24 +98,12 @@ def armor_store():
     main()
 
 # main()
-weapon_name = max(map(len, weapons)) + 2
-x = input('weapons or armor?')
-if x is '1':
-    y = str('weapons')
-else: y = str('armor')
-print(y)
-print(y+'_name')
 
-print("{:<5} {:<23} {:^5} {:^6}".format('Num', 'Name', 'Atk', 'Cost'))
+print("{} : {:<22} : {:^5} : {:^5}".format('Num', 'Name', '+atk', 'Cost'))
 for num, (k, v) in enumerate(weapons.items(), start=1):
-    print("{:<4}: {: <22} :{:^5}: {:^5}".format(num, k, v['+atk'], v['Cost']))
+    print("{:<3} : {:<22} : {:^5} : {:^5}".format(num, k, v['+atk'], v['Cost']))
 
-# tab = tabulate(['Num', 'Name', '+atk', 'Cost'])
-# for num, (k, v) in enumerate(weapons.items(), start=1):
-#     t.add_row(num, (k,v))
-# print(t)
-
-# t = PrettyTable()
-# t.field_names = ["Name", "Age"]
-# print(t)
-
+t = tabulate(['Num', 'Name', '+atk', 'Cost'])
+for num, (k, v) in enumerate(weapons.items(), start=1):
+    t.add_row(num, (k,v))
+print(t)
