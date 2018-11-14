@@ -1,7 +1,7 @@
 import random
 import itertools
-import tabulate
-import PrettyTable
+# import tabulate
+# from prettytable import PrettyTable
 
 weapons = {'Fist': {'+atk': 0, 'Cost': 10},
            'Wooden Sword': {'+atk': 2, 'Cost': 20},
@@ -97,12 +97,24 @@ def armor_store():
     main()
 
 # main()
+weapon_name = max(map(len, weapons)) + 2
+x = input('weapons or armor?')
+if x is '1':
+    y = str('weapons')
+else: y = str('armor')
+print(y)
+print(y+'_name')
 
-print("{} : {:<22} : {:^5} : {:^5}".format('Num', 'Name', '+atk', 'Cost'))
+print("{:<5} {:<23} {:^5} {:^6}".format('Num', 'Name', 'Atk', 'Cost'))
 for num, (k, v) in enumerate(weapons.items(), start=1):
-    print("{:<3} : {:<22} : {:^5} : {:^5}".format(num, k, v['+atk'], v['Cost']))
+    print("{:<4}: {: <22} :{:^5}: {:^5}".format(num, k, v['+atk'], v['Cost']))
 
-t = tabulate(['Num', 'Name', '+atk', 'Cost'])
-for num, (k, v) in enumerate(weapons.items(), start=1):
-    t.add_row(num, (k,v))
-print(t)
+# tab = tabulate(['Num', 'Name', '+atk', 'Cost'])
+# for num, (k, v) in enumerate(weapons.items(), start=1):
+#     t.add_row(num, (k,v))
+# print(t)
+
+# t = PrettyTable()
+# t.field_names = ["Name", "Age"]
+# print(t)
+
